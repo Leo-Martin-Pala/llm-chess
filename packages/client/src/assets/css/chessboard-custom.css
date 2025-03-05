@@ -1,0 +1,94 @@
+/*!* Override square colors *!*/
+/*.cg-wrap piece.white {*/
+/*    background-color: #fff !important;*/
+/*}*/
+
+/*.cg-wrap piece.black {*/
+/*    background-color: #000 !important;*/
+/*}*/
+
+/*!* Override board square colors *!*/
+/*.cg-wrap square.light {*/
+/*    background-color: #f0d9b5 !important;*/
+/*}*/
+
+/*.cg-wrap square.dark {*/
+/*    background-color: #b58863 !important;*/
+/*}*/
+/*background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Chess_Board.svg/600px-Chess_Board.svg.png"); !* Replace with your image *!*/
+
+/*!* Customize coordinates *!*/
+/*.coordinates {*/
+/*    color: #888 !important;*/
+/*    font-size: 12px !important;*/
+/*}*/
+
+cg-board {
+    background-image: none;
+    background-size: cover;
+    opacity: 1;
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+cg-board::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/board.png");
+    background-size: cover;
+    opacity: 0.35;
+    border-radius: 10px;
+    z-index: -1;
+}
+
+.rook.black{ /* changes the black rooks */
+    background-image: url("../images/black-rook.png") !important;
+}
+.pawn.black{ /* changes the black pawns */
+    background-image: url("../images/black-pawn.png") !important;
+}
+.bishop.black{ /* changes the black bishops */
+    background-image: url("../images/black-bishop.png") !important;
+}
+.knight.black{ /* changes the black knights */
+    background-image: url("../images/black-knight.png") !important;
+}
+.queen.black{ /* changes the black queens */
+    background-image: url("../images/black-queen.png") !important;
+}
+.king.black{ /* changes the black kings */
+    background-image: url("../images/black-king.png") !important;
+}
+
+.rook.white{ /* changes the white rooks */
+    background-image: url("../images/white-rook.png") !important;
+}
+.pawn.white{ /* changes the white pawns */
+    background-image: url("../images/white-pawn.png") !important;
+}
+.bishop.white{ /* changes the white bishops */
+    background-image: url("../images/white-bishop.png") !important;
+}
+.knight.white{ /* changes the white knights */
+    background-image: url("../images/white-knight.png") !important;
+}
+.queen.white{ /* changes the white queens */
+    background-image: url("../images/white-queen.png") !important;
+}
+.king.white{ /* changes the white kings */
+    background-image: url("../images/white-king.png") !important;
+}
+
+
+.black{ /* changes the black pieces */
+    opacity: 1;
+}
+
+.white{ /* changes the white pieces */
+    opacity: 1;
+}

@@ -1,0 +1,15 @@
+{
+  "name": "llm-chess",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "repository": "https://github.com/Leo-Martin-Pala/llm-chess.git",
+  "author": "Leo-Martin Pala <57061002+Leo-Martin-Pala@users.noreply.github.com>",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start:client": "yarn workspace @llm-chess/client dev",
+    "start:server": "yarn workspace @llm-chess/server dev"
+  }
+}
