@@ -1,14 +1,10 @@
 export class LlmEngine {
     boardApi;
     bestMove;
-    llmEngineName; // You can still keep engineName if you want to name your LLM engine
 
     constructor(boardApi) {
         this.boardApi = boardApi;
-
-        this.bestMove = null; // Initialize bestMove
-        // this.llmEngineName = "gemini/gemini-2.0-flash"; // Or whatever name you prefer
-        // this.llmEngineName = "deepseek r1 distill llama 70b (scaleway)"; // Or whatever name you prefer
+        this.bestMove = null;
     }
 
     async sendPosition(position, model) {

@@ -10,9 +10,9 @@ const currentModel = ref('gemini/gemini-2.0-flash');
 const modelMapping = {
   'Gemini flash 2.0': 'gemini/gemini-2.0-flash',
   'Gemini flash thinking': 'gemini/gemini-2.0-flash-thinking-exp',
-  'DeepSeek R1 70b': 'deepseek r1 distill llama 70b (scaleway)',
-  'DeepSeek R1 671b': 'deepseek r1 (scaleway)',
-  'Llama 3.3 70b': 'llama 3.3 70b (scaleway)',
+  'DeepSeek R1 70b': 'groq/deepseek-r1-distill-llama-70b',
+  'DeepSeek R1 671b': 'deepseek r1 (openrouter)',
+  'Llama 3.3 70b': 'llama 3.3 70b (together ai)',
   'Mistral large': 'mistral/mistral-large-latest',
 };
 

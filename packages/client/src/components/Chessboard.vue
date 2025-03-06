@@ -41,7 +41,6 @@ function playMoveSound(isCapture) {
 }
 
 async function handleMove(move) {
-  // me tahame saata praegust positsiooni mootorile
   const isCapture = move.captured || move.flags.includes('c');
   playMoveSound(isCapture);
 
