@@ -6,8 +6,8 @@ import {FallbackEngine} from '../Engine';
 import 'vue3-chessboard/style.css';
 import '../assets/css/chessboard-custom.css';  // Your custom styles
 
-const moveSound = new Audio('../../public/move.mp3');
-const captureSound = new Audio('../../public/capture.mp3');
+const moveSound = new Audio('/sounds/move.mp3');
+const captureSound = new Audio('/sounds/capture.mp3');
 
 const props = defineProps({
   modelName: {
