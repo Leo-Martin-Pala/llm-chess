@@ -37,10 +37,6 @@ function availableMoves() {
   chessboardRef.value?.boardAPI?.toggleMoves();
 }
 
-function toggleOrientation() {
-  chessboardRef.value?.boardAPI?.toggleOrientation();
-}
-
 </script>
 
 <template>
@@ -59,10 +55,6 @@ function toggleOrientation() {
           <clickable-button
               :on-click-callback="availableMoves"
               button-text="available moves"
-          />
-          <clickable-button
-              :on-click-callback="toggleOrientation"
-              button-text="orientation"
           />
           <dropdown-menu
               :models="modelMapping"

@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "start:client": "yarn workspace @llm-chess/client dev",
-    "start:server": "yarn workspace @llm-chess/server dev"
+    "start:server": "yarn workspace @llm-chess/server dev",
+    "build:client": "yarn workspace @llm-chess/client build"
   }
 }
