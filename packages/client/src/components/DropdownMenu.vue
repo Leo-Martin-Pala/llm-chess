@@ -3,9 +3,9 @@ import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const props = defineProps({
   models: {
+    // Example: { 'Gemini': 'gemini/gemini-2.0-flash', 'DeepSeek': 'deepseek r1 distill llama 70b (scaleway)' }
     type: Object,
     required: true,
-    // Example: { 'Gemini': 'gemini/gemini-2.0-flash', 'DeepSeek': 'deepseek r1 distill llama 70b (scaleway)' }
   },
   selectedModel: {
     type: String,
@@ -138,10 +138,10 @@ onBeforeUnmount(() => {
   position: absolute;
   top: 100%;
   left: 0;
-  z-index: 2500; /* Increased z-index */
+  z-index: 2500;
   min-width: 220px;
   margin-top: 8px;
-  background: rgba(20, 20, 40, 0.95); /* Increased opacity */
+  background: rgba(20, 20, 40, 0.95);
   border-radius: 8px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -150,17 +150,6 @@ onBeforeUnmount(() => {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 0 8px rgba(255, 0, 204, 0.2);
   overflow: hidden;
   transform-origin: top center;
-}
-
-.dropdown-fade-enter-active,
-.dropdown-fade-leave-active {
-  transition: opacity 0.2s, transform 0.2s;
-}
-
-.dropdown-fade-enter-from,
-.dropdown-fade-leave-to {
-  opacity: 0;
-  transform: translateY(-10px);
 }
 
 .dropdown-menu::before {

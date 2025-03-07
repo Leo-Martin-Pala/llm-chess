@@ -1,0 +1,78 @@
+/* Synthwave Font Styles */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Turret+Road:wght@400;500;700&display=swap');
+
+:root {
+  --font-synthwave-primary: 'Orbitron', sans-serif;
+  --font-synthwave-secondary: 'Audiowide', cursive;
+  --font-synthwave-alt: 'Syncopate', sans-serif;
+  --font-synthwave-text: 'Turret Road', sans-serif;
+  
+  --color-neon-pink: #ff00cc;
+  --color-neon-blue: #3333ff;
+  --color-neon-purple: #9900ff;
+  --color-neon-cyan: #00ffff;
+  
+  --gradient-synthwave: linear-gradient(45deg, var(--color-neon-pink), var(--color-neon-blue));
+  --gradient-synthwave-alt: linear-gradient(45deg, var(--color-neon-purple), var(--color-neon-cyan));
+  
+  --shadow-neon: 0 0 10px var(--color-neon-pink), 0 0 20px rgba(51, 51, 255, 0.5);
+  --shadow-neon-strong: 0 0 15px var(--color-neon-pink), 0 0 30px rgba(51, 51, 255, 0.7);
+  
+  --text-shadow-neon: 0 0 5px rgba(255, 255, 255, 0.7);
+  --text-shadow-neon-strong: 0 0 8px rgba(255, 255, 255, 0.9), 0 0 15px rgba(255, 0, 204, 0.7);
+}
+
+.synthwave-heading {
+  font-family: var(--font-synthwave-primary);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: white;
+  text-shadow: var(--text-shadow-neon-strong);
+}
+
+.synthwave-subheading {
+  font-family: var(--font-synthwave-secondary);
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: white;
+  text-shadow: var(--text-shadow-neon);
+}
+
+.synthwave-text {
+  font-family: var(--font-synthwave-text);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: white;
+  text-shadow: var(--text-shadow-neon);
+}
+
+.synthwave-label {
+  font-family: var(--font-synthwave-alt);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: white;
+  text-shadow: var(--text-shadow-neon);
+}
+
+/* Animation for text glow effect */
+@keyframes textGlow {
+  0% {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7), 0 0 10px rgba(255, 0, 204, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.9), 0 0 20px rgba(255, 0, 204, 0.7), 0 0 30px rgba(51, 51, 255, 0.5);
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7), 0 0 10px rgba(255, 0, 204, 0.5);
+  }
+}
+
+.synthwave-glow-text {
+  animation: textGlow 2s infinite;
+} 

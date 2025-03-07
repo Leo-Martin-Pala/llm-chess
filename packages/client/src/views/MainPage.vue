@@ -13,6 +13,7 @@ const modelMapping = {
   'DeepSeek R1 70b': 'groq/deepseek-r1-distill-llama-70b',
   'DeepSeek R1 671b': 'deepseek r1 (openrouter)',
   'Llama 3.3 70b': 'llama 3.3 70b (together ai)',
+  'Llama 3.3 70b (fast)': 'groq/llama-3.3-70b-versatile',
   'Mistral large': 'mistral/mistral-large-latest',
 };
 

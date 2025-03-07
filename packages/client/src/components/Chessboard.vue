@@ -1,11 +1,10 @@
 <script setup>
-import {defineExpose, ref, watch} from 'vue';
+import {defineExpose, ref} from 'vue';
 import {TheChessboard} from 'vue3-chessboard';
 import {LlmEngine} from '../LLM-Engine';
 import {FallbackEngine} from '../Engine';
 import GameNotification from './GameNotification.vue';
 import GameSounds from './GameSounds.vue';
-import ConfettiEffect from './ConfettiEffect.vue';
 import 'vue3-chessboard/style.css';
 import '../assets/css/chessboard-custom.css';  // Your custom styles
 
@@ -17,7 +16,7 @@ const props = defineProps({
 });
 
 const boardConfig = {
-  coordinates:  false,
+  coordinates: false,
 };
 
 const boardAPI = ref(null);
@@ -32,25 +31,34 @@ const gameNotification = ref({
   color: null
 });
 
-// Confetti state
-const showConfetti = ref(false);
-
 function handleBoardCreated(boardApi) {
   boardAPI.value = boardApi;
   fallbackEngine = new FallbackEngine(boardApi);
   llmEngine = new LlmEngine(boardApi);
+  
+  // Play game start sound
+  gameSoundsRef.value?.playSound('gameStart');
 }
 
-function playMoveSound(isCapture) {
-  const soundType = isCapture ? 'capture' : 'move';
-  gameSoundsRef.value?.playSound(soundType);
+function playMoveSound(move) {
+  // Check if the move puts the opponent in check
+  if (boardAPI.value?.getIsCheck()) {
+    gameSoundsRef.value?.playSound('moveCheck');
+  } else if (move.flags?.includes('c')) {
+    gameSoundsRef.value?.playSound('capture');
+  } else if (move.flags?.includes('k') || move.flags?.includes('q')) {
+    gameSoundsRef.value?.playSound('castle');
+  } else if (move.flags?.includes('p')) {
+    gameSoundsRef.value?.playSound('promote');
+  } else {
+    gameSoundsRef.value?.playSound('move');
+  }
 }
 
 async function handleMove(move) {
-  const isCapture = move.captured || move.flags.includes('c');
-  playMoveSound(isCapture);
+  playMoveSound(move);
 
-  if (boardAPI.value.getTurnColor() === 'black'  && !boardAPI.value.getIsGameOver()) {
+  if (boardAPI.value.getTurnColor() === 'black' && !boardAPI.value.getIsGameOver()) {
     try {
       await llmEngine?.sendPosition(boardAPI?.value.getFen(), props.modelName);
     } catch (error) {
@@ -58,7 +66,6 @@ async function handleMove(move) {
       console.log('Fallback to Stockfish');
       fallbackToStockfish();
     }
-  } else {
   }
 }
 
@@ -78,17 +85,8 @@ function fallbackToStockfish() {
   }
 }
 
-function handleCheck(colorInCheck) {
-  gameSoundsRef.value?.playSound('check');
-}
-
 function handleCheckmate(isMated) {
-  gameSoundsRef.value?.playSound('checkmate');
-  
-  // Show confetti for checkmate (only when white wins for now)
-  if (isMated === 'black') {
-    showConfetti.value = true;
-  }
+  gameSoundsRef.value?.playSound('gameEnd');
   
   gameNotification.value = {
     visible: true,
@@ -98,7 +96,7 @@ function handleCheckmate(isMated) {
 }
 
 function handleStalemate() {
-  gameSoundsRef.value?.playSound('stalemate');
+  gameSoundsRef.value?.playSound('gameEnd');
   gameNotification.value = {
     visible: true,
     type: 'stalemate',
@@ -107,7 +105,7 @@ function handleStalemate() {
 }
 
 function handleDraw() {
-  gameSoundsRef.value?.playSound('draw');
+  gameSoundsRef.value?.playSound('gameEnd');
   gameNotification.value = {
     visible: true,
     type: 'draw',
@@ -119,8 +117,9 @@ function closeNotification() {
   gameNotification.value.visible = false;
 }
 
-function handleConfettiComplete() {
-  showConfetti.value = false;
+function startNewGame() {
+  boardAPI.value?.resetBoard();
+  gameSoundsRef.value?.playSound('gameStart');
 }
 
 defineExpose({
@@ -136,7 +135,6 @@ defineExpose({
         :board-config=boardConfig
         @board-created="handleBoardCreated"
         @move="handleMove"
-        @check="handleCheck"
         @checkmate="handleCheckmate"
         @stalemate="handleStalemate"
         @draw="handleDraw"
@@ -149,12 +147,7 @@ defineExpose({
         :color="gameNotification.color"
         :visible="gameNotification.visible"
         @close="closeNotification"
-    />
-    
-    <ConfettiEffect 
-        :active="showConfetti" 
-        :duration="6000"
-        @complete="handleConfettiComplete"
+        @newGame="startNewGame"
     />
     
     <GameSounds ref="gameSoundsRef" />
