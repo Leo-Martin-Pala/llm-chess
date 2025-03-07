@@ -51,14 +51,13 @@ export class FallbackEngine {
         }
 
         if (uciStringSplitted[0] === 'bestmove' && uciStringSplitted[1]) {
-            if (uciStringSplitted[1] !== this.bestMove) {
-                this.bestMove = uciStringSplitted[1];
-                if (this.boardApi.getTurnColor() === 'black') {
-                    this.boardApi.move({
-                        from: this.bestMove.slice(0, 2),
-                        to: this.bestMove.slice(2, 4),
-                    });
-                }
+            this.bestMove = uciStringSplitted[1];
+            
+            if (this.boardApi.getTurnColor() === 'black') {
+                this.boardApi.move({
+                    from: this.bestMove.slice(0, 2),
+                    to: this.bestMove.slice(2, 4),
+                });
             }
         }
     }

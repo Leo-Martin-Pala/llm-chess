@@ -44,11 +44,12 @@ export class LlmEngine {
     }
 
     handleAiMoveResponse(aiMove) {
-        if (aiMove && aiMove !== this.bestMove) { // If multiple responses are received, only consider the latest one
-            this.bestMove = aiMove;
-            if (this.boardApi.getTurnColor() === 'black') { // Assuming black is the LLM engine
-                this.boardApi.move(this.bestMove);
-            }
+        // Store the move for reference
+        this.bestMove = aiMove;
+        
+        // Always apply the move if it's the AI's turn, even if it's the same as before
+        if (aiMove && this.boardApi.getTurnColor() === 'black') { // Assuming black is the LLM engine
+            this.boardApi.move(aiMove);
         }
     }
 }
