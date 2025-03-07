@@ -1,3 +1,5 @@
+@import './synthwave-fonts.css';
+
 html, body {
     margin: 0;
     padding: 0;
@@ -6,6 +8,7 @@ html, body {
     min-height: 100%; /* Add this */
     overflow-x: hidden;
     box-sizing: border-box;
+    font-family: var(--font-synthwave-text);
 }
 
 *, *:before, *:after {

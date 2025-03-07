@@ -23,15 +23,26 @@
 /*    font-size: 12px !important;*/
 /*}*/
 
+/* Synthwave Chessboard Styling */
+cg-container {
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(255, 0, 204, 0.4), 0 0 40px rgba(51, 51, 255, 0.3);
+    overflow: hidden;
+    z-index: 5; /* Lower than dropdown menu z-index */
+}
+
 cg-board {
     background-image: none;
     background-size: cover;
     opacity: 1;
-    backdrop-filter: blur(10px); /* Frosted glass effect */
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    background-color: rgba(26, 0, 51, 0.5);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 0, 204, 0.3);
 }
 
+/* Grid overlay for synthwave effect */
 cg-board::before {
     content: "";
     position: absolute;
@@ -39,56 +50,141 @@ cg-board::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("../images/board.png");
-    background-size: cover;
-    opacity: 0.35;
-    border-radius: 10px;
+    background-image: 
+        linear-gradient(rgba(255, 0, 204, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 0, 204, 0.07) 1px, transparent 1px),
+        url("../images/board.png");
+    background-size: 12.5% 12.5%, 12.5% 12.5%, cover;
+    opacity: 0.4;
+    border-radius: 8px;
     z-index: -1;
+    animation: gridPulse 12s infinite alternate;
 }
 
+/* Synthwave grid animation */
+@keyframes gridPulse {
+    0% {
+        opacity: 0.3;
+        background-image: 
+            linear-gradient(rgba(255, 0, 204, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 0, 204, 0.05) 1px, transparent 1px),
+            url("../images/board.png");
+    }
+    50% {
+        opacity: 0.4;
+        background-image: 
+            linear-gradient(rgba(51, 51, 255, 0.07) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(51, 51, 255, 0.07) 1px, transparent 1px),
+            url("../images/board.png");
+    }
+    100% {
+        opacity: 0.35;
+        background-image: 
+            linear-gradient(rgba(255, 0, 204, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 0, 204, 0.05) 1px, transparent 1px),
+            url("../images/board.png");
+    }
+}
+
+/* Square styling */
+cg-board square.light {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+cg-board square.dark {
+    background-color: rgba(50, 30, 70, 0.25) !important; /* Adjusted purple shade for dark squares */
+}
+
+/* Highlight squares */
+cg-board square.selected {
+    background: radial-gradient(rgba(255, 0, 204, 0.3), rgba(51, 51, 255, 0.2)) !important;
+}
+
+cg-board square.last-move {
+    background-color: rgba(51, 51, 255, 0.25) !important;
+}
+
+cg-board square.move-dest {
+    background: radial-gradient(rgba(255, 0, 204, 0.2), transparent) !important;
+    box-shadow: inset 0 0 5px rgba(255, 0, 204, 0.5);
+}
+
+cg-board square.premove-dest {
+    background: radial-gradient(rgba(51, 51, 255, 0.2), transparent) !important;
+}
+
+cg-board square.check {
+    background: radial-gradient(rgba(255, 0, 0, 0.3), transparent) !important;
+}
+
+/* Piece styling - enhance black pieces for better visibility */
 .rook.black{ /* changes the black rooks */
     background-image: url("../images/black-rook.png") !important;
+    filter: drop-shadow(0 0 4px rgba(153, 0, 255, 0.8)) brightness(1.15);
 }
 .pawn.black{ /* changes the black pawns */
     background-image: url("../images/black-pawn.png") !important;
+    filter: drop-shadow(0 0 4px rgba(153, 0, 255, 0.8)) brightness(1.15);
 }
 .bishop.black{ /* changes the black bishops */
     background-image: url("../images/black-bishop.png") !important;
+    filter: drop-shadow(0 0 4px rgba(153, 0, 255, 0.8)) brightness(1.15);
 }
 .knight.black{ /* changes the black knights */
     background-image: url("../images/black-knight.png") !important;
+    filter: drop-shadow(0 0 4px rgba(153, 0, 255, 0.8)) brightness(1.15);
 }
 .queen.black{ /* changes the black queens */
     background-image: url("../images/black-queen.png") !important;
+    filter: drop-shadow(0 0 4px rgba(153, 0, 255, 0.8)) brightness(1.15);
 }
 .king.black{ /* changes the black kings */
     background-image: url("../images/black-king.png") !important;
+    filter: drop-shadow(0 0 4px rgba(153, 0, 255, 0.8)) brightness(1.15);
 }
 
 .rook.white{ /* changes the white rooks */
     background-image: url("../images/white-rook.png") !important;
+    filter: drop-shadow(0 0 4px rgba(255, 0, 204, 0.7));
 }
 .pawn.white{ /* changes the white pawns */
     background-image: url("../images/white-pawn.png") !important;
+    filter: drop-shadow(0 0 4px rgba(255, 0, 204, 0.7));
 }
 .bishop.white{ /* changes the white bishops */
     background-image: url("../images/white-bishop.png") !important;
+    filter: drop-shadow(0 0 4px rgba(255, 0, 204, 0.7));
 }
 .knight.white{ /* changes the white knights */
     background-image: url("../images/white-knight.png") !important;
+    filter: drop-shadow(0 0 4px rgba(255, 0, 204, 0.7));
 }
 .queen.white{ /* changes the white queens */
     background-image: url("../images/white-queen.png") !important;
+    filter: drop-shadow(0 0 4px rgba(255, 0, 204, 0.7));
 }
 .king.white{ /* changes the white kings */
     background-image: url("../images/white-king.png") !important;
+    filter: drop-shadow(0 0 4px rgba(255, 0, 204, 0.7));
 }
-
 
 .black{ /* changes the black pieces */
     opacity: 1;
+    transition: filter 0.3s ease;
 }
 
 .white{ /* changes the white pieces */
     opacity: 1;
+    transition: filter 0.3s ease;
+}
+
+/* Piece hover effect */
+piece:hover {
+    filter: brightness(1.2) !important;
+}
+
+/* Dragging piece effect */
+piece.dragging {
+    filter: brightness(1.3) !important;
+    z-index: 100;
 }

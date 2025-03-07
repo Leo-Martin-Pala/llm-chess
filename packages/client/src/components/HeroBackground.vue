@@ -15,7 +15,9 @@
       <source src="../assets/videos/synthwave-background.webm" type="video/webm" />
       <source src="../assets/videos/synthwave-background.mp4" type="video/mp4" />
     </video>
-    <slot></slot>
+    <div class="content-wrapper">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -32,12 +34,17 @@ function handleVideoError(e) {
 }
 
 onMounted(() => {
-  // Ensure video plays in Firefox by explicitly calling play()
+  // Force reload the video element
   if (videoEl.value) {
-    videoEl.value.play().catch(err => {
-      console.warn('Autoplay failed:', err);
-      videoFailed.value = true;
-    });
+    videoEl.value.load();
+    
+    // Ensure video plays by explicitly calling play()
+    setTimeout(() => {
+      videoEl.value.play().catch(err => {
+        console.warn('Autoplay failed:', err);
+        videoFailed.value = true;
+      });
+    }, 100);
 
     // Check if video is actually playing after a short delay
     setTimeout(() => {
@@ -47,7 +54,7 @@ onMounted(() => {
         console.warn('Video not playing after timeout');
         videoFailed.value = true;
       }
-    }, 2000);
+    }, 3000);
   }
 });
 </script>
@@ -63,6 +70,17 @@ onMounted(() => {
   overflow: hidden;
 }
 
+.content-wrapper {
+  position: relative;
+  z-index: 10; /* Ensure content is above the video but below dropdowns */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible; /* Allow dropdowns to be visible */
+}
+
 .fallback-bg {
   position: absolute;
   top: 0;
@@ -72,7 +90,7 @@ onMounted(() => {
   background: linear-gradient(135deg, #800080, #4B0082, #9400D3, #8A2BE2);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
-  z-index: -1;
+  z-index: 1;
 }
 
 .video-bg {
@@ -82,11 +100,15 @@ onMounted(() => {
   object-fit: cover;
   width: 100%;
   height: 100%;
-  z-index: 0;
+  z-index: 2;
 }
 
 .fallback-active .video-bg {
   display: none;
+}
+
+.fallback-active .fallback-bg {
+  z-index: 2;
 }
 
 @keyframes gradient {
