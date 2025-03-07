@@ -2,7 +2,6 @@ export class FallbackEngine {
     stockfish;
     boardApi;
     bestMove;
-    engineName;
 
     constructor(boardApi) {
         this.boardApi = boardApi;
